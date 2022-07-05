@@ -1,0 +1,679 @@
+
+This module will switch Compiler environment to gnu/9.1.0 and load mkl/2019.0.5
+for R/4.1.0
+
+
+Lmod is automatically replacing "intel/19.0.5" with "gnu/9.1.0".
+
+
+Due to MODULEPATH changes, the following have been reloaded:
+  1) mvapich2/2.3.3
+
+
+
+Registered S3 method overwritten by 'gamlss':
+  method   from
+  print.ri bit 
+
+Registered S3 method overwritten by 'ggtree':
+  method      from 
+  identify.gg ggfun
+Attaching SeuratObject
+Loading required package: BSgenome
+Loading required package: BiocGenerics
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unsplit, which.max, which.min
+
+Loading required package: S4Vectors
+Loading required package: stats4
+
+Attaching package: ‘S4Vectors’
+
+The following object is masked from ‘package:base’:
+
+    expand.grid
+
+Loading required package: IRanges
+Loading required package: GenomeInfoDb
+Loading required package: GenomicRanges
+Loading required package: Biostrings
+Loading required package: XVector
+
+Attaching package: ‘Biostrings’
+
+The following object is masked from ‘package:base’:
+
+    strsplit
+
+Loading required package: rtracklayer
+Loading genome sequences of mm10 ...
+
+Computing the GC content, CRE lengths, and dinucleotide base frequencies ...
+
+Loading required package: parallel
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:Biostrings’:
+
+    collapse, intersect, setdiff, setequal, union
+
+The following object is masked from ‘package:XVector’:
+
+    slice
+
+The following objects are masked from ‘package:GenomicRanges’:
+
+    intersect, setdiff, union
+
+The following object is masked from ‘package:GenomeInfoDb’:
+
+    intersect
+
+The following objects are masked from ‘package:IRanges’:
+
+    collapse, desc, intersect, setdiff, slice, union
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    first, intersect, rename, setdiff, setequal, union
+
+The following objects are masked from ‘package:BiocGenerics’:
+
+    combine, intersect, setdiff, union
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘data.table’
+
+The following objects are masked from ‘package:dplyr’:
+
+    between, first, last
+
+The following object is masked from ‘package:GenomicRanges’:
+
+    shift
+
+The following object is masked from ‘package:IRanges’:
+
+    shift
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    first, second
+
+
+Attaching package: ‘Matrix’
+
+The following object is masked from ‘package:S4Vectors’:
+
+    expand
+
+Calculating cell attributes from input UMI matrix: log_umi
+Variance stabilizing transformation of count matrix of size 211 by 1000
+Model formula is y ~ log_umi
+Get Negative Binomial regression parameters per gene
+Using 211 genes, 1000 cells
+  |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
+There are 1 estimated thetas smaller than 1e-07 - will be set to 1e-07
+Found 1 outliers - those will be ignored in fitting/regularization step
+
+Second step: Get residuals using fitted parameters for 211 genes
+  |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
+Computing corrected count matrix for 211 genes
+  |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
+Calculating gene attributes
+Wall clock passed: Time difference of 2.607686 secs
+Determine variable features
+Place corrected count matrix in counts slot
+Centering data matrix
+  |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
+Set default assay to SCT
+Performing TF-IDF normalization
+Retained 211 genes and 303 CREs that are close to at least one CREs/genes.
+
+Finished identified 604 TF-peak pairs.
+
+Identified 38 TFs binding 257 TFs.
+
+Creating IRISCEM object. 
+The original input file contains 1000 cells and 211 genes 
+Removed 0 genes that total expression value is equal or less than 0
+Removed 0 cells that number of expressed gene is equal or less than 0
+number of iterations= 127 
+using all genes.
+Progress:0%
+Progress:10%
+Progress:20%
+Progress:30%
+Progress:40%
+Progress:50%
+Progress:60%
+Progress:70%
+Progress:80%
+Progress:90%
+Progress:100%
+Wrote the discretized gene expression to file /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Out_sampled/LTMG_matrix.txt.
+
+Finished LTMG modeling for 211 genes across 1000 cells.
+
+QUBIC2 command: /fs/ess/PCON0022/liyang/tools/biclustering/QUBIC2-master/qubic -i /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Out_sampled/LTMG_matrix.txt -c 1 -k 10 -o 500 -f 0.25
+
+
+QUBIC 2.2: greedy biclustering (compiled Dec  9 2021 12:12:18)
+
+File /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Out_sampled/LTMG_matrix.txt contains 211 genes by 1000 conditions
+Discretized data contains 2 classes with charset [ 0 1 ]
+Formatted data are written to /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Out_sampled/LTMG_matrix.txt.chars
+Generating seed list (minimum weight 10)
+8547 seeds generated [0.094 seconds elapsed]
+Clustering started
+.............................................................................................................................................
+56 clusters are written to /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Out_sampled/LTMG_matrix.txt.blocks [0.301 seconds elapsed]
+56 QUBIC 2.0 blocks were identified.
+
+56 QUBIC 2.0 blocks were identified.
+
+Identified 10 QUBIC biclusters.
+
+10 QUBIC biclusters will be used for Steiner forest modeling.
+
+Loading required package: monocle
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+Loading required package: ggplot2
+Loading required package: VGAM
+Loading required package: splines
+Loading required package: DDRTree
+Loading required package: irlba
+Loading required package: Gviz
+Loading required package: grid
+
+Attaching package: ‘grid’
+
+The following object is masked from ‘package:Biostrings’:
+
+    pattern
+
+
+Attaching package: 'igraph'
+
+The following objects are masked from 'package:dplyr':
+
+    as_data_frame, groups, union
+
+The following objects are masked from 'package:rtracklayer':
+
+    blocks, path
+
+The following object is masked from 'package:Biostrings':
+
+    union
+
+The following object is masked from 'package:XVector':
+
+    path
+
+The following object is masked from 'package:GenomicRanges':
+
+    union
+
+The following object is masked from 'package:IRanges':
+
+    union
+
+The following object is masked from 'package:S4Vectors':
+
+    union
+
+The following objects are masked from 'package:BiocGenerics':
+
+    normalize, path, union
+
+The following objects are masked from 'package:stats':
+
+    decompose, spectrum
+
+The following object is masked from 'package:base':
+
+    union
+
+Testing 149 genes and 280 peaks
+Finished generating 75 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 78 CRE-CRE linkages.
+
+Testing 147 genes and 279 peaks
+Finished generating 85 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 66 CRE-CRE linkages.
+
+Testing 160 genes and 258 peaks
+Finished generating 104 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 62 CRE-CRE linkages.
+
+Testing 125 genes and 288 peaks
+Finished generating 67 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 73 CRE-CRE linkages.
+
+Testing 153 genes and 288 peaks
+Finished generating 108 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 92 CRE-CRE linkages.
+
+Testing 122 genes and 258 peaks
+Finished generating 57 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 54 CRE-CRE linkages.
+
+Testing 102 genes and 253 peaks
+Finished generating 64 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 55 CRE-CRE linkages.
+
+Testing 126 genes and 286 peaks
+Finished generating 83 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 81 CRE-CRE linkages.
+
+Testing 107 genes and 283 peaks
+Finished generating 66 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 74 CRE-CRE linkages.
+
+Testing 127 genes and 270 peaks
+Finished generating 80 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 81 CRE-CRE linkages.
+
+Finished constructing 10 heterogeneous graphs.
+
+51 seeds are identified for hybrid biclustering.
+
+Processing the putative seed : 1 ...
+
+Processing the 1 hybrid bicluster ...
+
+Loading required package: KernSmooth
+KernSmooth 2.23 loaded
+Copyright M. P. Wand 1997-2009
+6/5/13 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 2 ...
+
+Processing the 2 hybrid bicluster ...
+
+6/6/12 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 3 ...
+
+Processing the 3 hybrid bicluster ...
+
+5/5/12 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 4 ...
+
+Processing the 4 hybrid bicluster ...
+
+5/5/13 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 5 ...
+
+Processing the 5 hybrid bicluster ...
+
+6/6/11 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 6 ...
+
+Processing the 6 hybrid bicluster ...
+
+5/5/12 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 7 ...
+
+Processing the 7 hybrid bicluster ...
+
+6/6/10 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 8 ...
+
+Processing the 8 hybrid bicluster ...
+
+Processing the putative seed : 9 ...
+
+Processing the putative seed : 10 ...
+
+Processing the 9 hybrid bicluster ...
+
+4/4/12 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 11 ...
+
+Processing the 10 hybrid bicluster ...
+
+3/3/17 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 12 ...
+
+Processing the putative seed : 13 ...
+
+Processing the 11 hybrid bicluster ...
+
+5/5/11 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 14 ...
+
+Processing the 12 hybrid bicluster ...
+
+4/4/12 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 15 ...
+
+Processing the putative seed : 16 ...
+
+Processing the 13 hybrid bicluster ...
+
+3/3/11 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 17 ...
+
+Processing the 14 hybrid bicluster ...
+
+4/4/12 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 18 ...
+
+Processing the 15 hybrid bicluster ...
+
+4/4/11 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 19 ...
+
+Processing the 16 hybrid bicluster ...
+
+4/4/10 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 20 ...
+
+Processing the putative seed : 21 ...
+
+Processing the 17 hybrid bicluster ...
+
+4/4/12 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 22 ...
+
+Processing the 18 hybrid bicluster ...
+
+3/3/13 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 23 ...
+
+Processing the 19 hybrid bicluster ...
+
+2/2/23 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 24 ...
+
+Processing the 20 hybrid bicluster ...
+
+3/3/18 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 25 ...
+
+Processing the 21 hybrid bicluster ...
+
+3/3/10 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 26 ...
+
+Processing the putative seed : 27 ...
+
+Processing the 22 hybrid bicluster ...
+
+Processing the putative seed : 28 ...
+
+Processing the 23 hybrid bicluster ...
+
+5/5/10 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 29 ...
+
+Processing the 24 hybrid bicluster ...
+
+3/3/10 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 30 ...
+
+Processing the 25 hybrid bicluster ...
+
+3/3/11 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 31 ...
+
+Processing the 26 hybrid bicluster ...
+
+2/2/17 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 32 ...
+
+Processing the 27 hybrid bicluster ...
+
+4/4/11 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 33 ...
+
+Processing the 28 hybrid bicluster ...
+
+3/3/12 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 34 ...
+
+Processing the 29 hybrid bicluster ...
+
+4/4/11 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 35 ...
+
+Processing the 30 hybrid bicluster ...
+
+2/2/11 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 36 ...
+
+Processing the 31 hybrid bicluster ...
+
+2/2/11 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 37 ...
+
+Processing the putative seed : 38 ...
+
+Processing the 32 hybrid bicluster ...
+
+3/3/10 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 39 ...
+
+Processing the 33 hybrid bicluster ...
+
+Processing the putative seed : 40 ...
+
+Processing the 34 hybrid bicluster ...
+
+2/2/10 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 41 ...
+
+Processing the putative seed : 42 ...
+
+Processing the 35 hybrid bicluster ...
+
+4/4/12 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 43 ...
+
+Processing the 36 hybrid bicluster ...
+
+3/3/10 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 44 ...
+
+Processing the 37 hybrid bicluster ...
+
+2/2/21 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 45 ...
+
+Processing the 38 hybrid bicluster ...
+
+3/3/12 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 46 ...
+
+Processing the putative seed : 47 ...
+
+Processing the 39 hybrid bicluster ...
+
+2/2/15 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 48 ...
+
+Processing the 40 hybrid bicluster ...
+
+2/2/14 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 49 ...
+
+Processing the putative seed : 50 ...
+
+Processing the putative seed : 51 ...
+
+Identified 40 hybrid biclusters (HBCs).
+
+17 HBCs are discovered after fine-tuning.
+
+Performing submodular optimization ...
+
+Calculating the pairwise similarity between HBCs ...
+
+Finished evaluating the 1 HBCs.
+
+eGRN optimization score: 4.
+
+Finished evaluating the 2 HBCs.
+
+eGRN optimization score: 17.
+
+Finished evaluating the 3 HBCs.
+
+eGRN optimization score: 20.
+
+Finished evaluating the 4 HBCs.
+
+eGRN optimization score: 22.
+
+Finished evaluating the 5 HBCs.
+
+eGRN optimization score: 35.
+
+Finished evaluating the 6 HBCs.
+
+eGRN optimization score: 42.
+
+Finished evaluating the 7 HBCs.
+
+eGRN optimization score: 44.
+
+Finished evaluating the 8 HBCs.
+
+eGRN optimization score: 47.
+
+Finished evaluating the 9 HBCs.
+
+eGRN optimization score: 48.
+
+Finished evaluating the 10 HBCs.
+
+eGRN optimization score: 49.
+
+Finished evaluating the 11 HBCs.
+
+eGRN optimization score: 50.
+
+Finished evaluating the 12 HBCs.
+
+eGRN optimization score: 51.
+
+Finished evaluating the 13 HBCs.
+
+eGRN optimization score: 51.
+
+Finished evaluating the 14 HBCs.
+
+eGRN optimization score: 53.
+
+Finished evaluating the 15 HBCs.
+
+eGRN optimization score: 53.
+
+Finished evaluating the 16 HBCs.
+
+eGRN optimization score: 54.
+
+Finished evaluating the 17 HBCs.
+
+eGRN optimization score: 55.
+
+17 eGRNs yield the maximum score.
+
+Submodular optimization identified 17 enhancer gene regulatory networks (eGRNs).
+
+There were 21 warnings (use warnings() to see them)
