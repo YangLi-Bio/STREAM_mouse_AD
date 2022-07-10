@@ -9,6 +9,7 @@
 library(Seurat)
 library(dplyr)
 library(pbmcapply)
+library(ggvenn)
 
 
 # Global parameters
@@ -127,9 +128,77 @@ stacked.bar.df$Time <- factor(stacked.bar.df$Time, levels = c("2.5 months", "5.7
 stacked.bar.df$Ratio <- as.numeric(stacked.bar.df$Ratio)
 qs::qsave(stacked.bar.df, paste0(R.dir, "Stacked_barplot_eGRN_time.qsave"))
 p.stacked <- ggplot(stacked.bar.df, aes(fill = Time, y = Ratio, x = eGRN)) + 
-  geom_bar(position = "fill", stat = "identity")
+  geom_bar(position = "fill", stat = "identity") + 
+  scale_fill_manual(values = c("red", "green", "blue"))
 p.stacked
 qs::qsave(p.stacked, paste0(R.dir, "Stacked_barplots_eGRN_time.qsave"))
 
 
-# Inspect 2.5 months v.s. 13+ months and check the changing trend of expression and accessibility
+# Rule out the 5.7 months
+# 2.5 months, 5.7 months, and 13+ months occupy 35.2%, 11.0%, and 53.8% barcodes
+# Therefore, we only ocus on the 1.5 and 13+ month conditions
+table(obj$Time) / sum(table(obj$Time))
+stacked.bars.no.5.7 <- stacked.bar.df
+stacked.bars.no.5.7 <- stacked.bars.no.5.7[stacked.bars.no.5.7$Time != "5.7 months",]
+dim(stacked.bar.df)
+dim(stacked.bars.no.5.7)
+p.stacked.no.5.7 <- ggplot(stacked.bars.no.5.7, aes(fill = Time, y = Ratio, x = eGRN)) + 
+  geom_bar(position = "fill", stat = "identity") + 
+  scale_fill_manual(values = c("red", "blue"))
+p.stacked.no.5.7
+qs::qsave(p.stacked.no.5.7, paste0(R.dir, "Stacked_barplots_eGRN_time_no_5.7_months.qsave"))
+
+
+# Partition the eGRNs into three categories: 
+# 1. Active in 50%+ cells of 2.5 months
+# 2. Active in 50%+ cells of 13+ months
+# 3. Other cells
+eGRNs.splited <- split(stacked.bars.no.5.7, f = stacked.bars.no.5.7$eGRN)
+eGRNs.times <- sapply(eGRNs.splited, function(x) {
+  x$Ratio / sum(x$Ratio)
+}) %>% t
+colnames(eGRNs.times) <- c("2.5 months", "13+ months")
+head(eGRNs.times)
+dim(eGRNs.times)
+eGRNs.2.5 <- core.eGRNs[eGRNs.times[, 1] > 0.50]
+length(eGRNs.2.5)
+eGRNs.13 <- core.eGRNs[eGRNs.times[, 2] > 0.50]
+length(eGRNs.13)
+TFs.2.5 <- sapply(eGRNs.2.5, "[[", "TF") %>% table %>% names
+TFs.13 <- sapply(eGRNs.13, "[[", "TF") %>% table %>% names
+qs::qsave(eGRNs.2.5, paste0(R.dir, "eGRNs_2.5_months.qsave"))
+qs::qsave(eGRNs.13, paste0(R.dir, "eGRNs_13_months.qsave"))
+
+
+# Get the intersected cells where both eGRNs.2.5 and eGRNs.13 are active
+
+p.venn.TFs <- ggvenn(list("2.5 months" = TFs.2.5, "13+ months" = TFs.13), 
+       columns = c("2.5 months", "13+ months"), 
+       # show_elements = T,
+       fill_color = c("#FF0000", "#0000FF"), 
+       text_size = 6, 
+       stroke_size = 0.3)
+qs::qsave(p.venn.TFs, paste0(R.dir, "Venn_diagrams_TFs_2.5_13.qsave"))
+
+
+# Get the heatmap of TF expression, chromatin accessibility, and target expression across
+# 2.5 months and 13+ months
+
+# We cannot observe obvious difference between expression of target genes between 
+# 2.5 months v.s. 13+ months. Hence, we will not include this heatmap.
+
+# We cannot observe obvious difference in expression in eGRN cells between 2.5 months v.s. 
+# 13+ months
+
+# Use a volcano plot or MA plot to visualize the difference in expression, accessibility, and TF
+# between 2.5 months v.s. 13+ months
+rna.m <- GetAssayData(obj, "data", "RNA")
+atac.m <- GetAssayData(obj, "data", "ATAC")
+cells.2.5 <- colnames(obj)[which(obj$Time == "2.5 months")]
+length(cells.2.5)
+head(cells.2.5)
+cells.13 <- colnames(obj)[which(obj$Time == "13+ months")]
+length(cells.13)
+head(cells.13)
+eGRNs.timed <- c(eGRNs.2.5, eGRNs.13)
+cells.eGRN <- Reduce("union", lapply(eGRNs.timed, "[[", "cells"))
