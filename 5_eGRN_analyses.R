@@ -190,15 +190,179 @@ qs::qsave(p.venn.TFs, paste0(R.dir, "Venn_diagrams_TFs_2.5_13.qsave"))
 # We cannot observe obvious difference in expression in eGRN cells between 2.5 months v.s. 
 # 13+ months
 
-# Use a volcano plot or MA plot to visualize the difference in expression, accessibility, and TF
-# between 2.5 months v.s. 13+ months
-rna.m <- GetAssayData(obj, "data", "RNA")
-atac.m <- GetAssayData(obj, "data", "ATAC")
-cells.2.5 <- colnames(obj)[which(obj$Time == "2.5 months")]
-length(cells.2.5)
-head(cells.2.5)
-cells.13 <- colnames(obj)[which(obj$Time == "13+ months")]
-length(cells.13)
-head(cells.13)
-eGRNs.timed <- c(eGRNs.2.5, eGRNs.13)
-cells.eGRN <- Reduce("union", lapply(eGRNs.timed, "[[", "cells"))
+
+# Count the number of target genes in eGRNs
+genes.2.5 <- Reduce("union", sapply(eGRNs.2.5, "[[", "genes"))
+length(genes.2.5)
+TFs.2.5 <- Reduce("union", sapply(eGRNs.2.5, "[[", "TF")) %>% tolower %>% capitalize
+length(TFs.2.5)
+length(intersect(genes.2.5, TFs.2.5))
+genes.13 <- Reduce("union", sapply(eGRNs.13, "[[", "genes"))
+length(genes.13)
+TFs.13 <- Reduce("union", sapply(eGRNs.13, "[[", "TF")) %>% tolower %>% capitalize
+length(TFs.13)
+length(intersect(genes.13, TFs.13))
+
+
+# Create assay for the RNA expression
+eGRNs.two.times <- c(eGRNs.2.5, eGRNs.13)
+length(eGRNs.two.times)
+rna.m <- GetAssayData(obj, slot = "data", assay = "RNA")
+qs::qsave(eGRNs.two.times, paste0(R.dir, "eGRNs_two_times.qsave"))
+eGRN.exp <- Reduce("rbind", pbmclapply(eGRNs.two.times, function(x) {
+  v <- apply(rna.m[x$genes, , drop = F], 2, mean)
+  v[setdiff(colnames(rna.m), x$cells)] <- 0
+  v
+}), mc.cores = detectCores())
+rownames(eGRN.exp) <- seq_along(eGRNs.two.times)
+dim(eGRN.exp)
+head(eGRN.exp[1:5, 1:5])
+sapply(eGRNs.two.times, "[[", "TF")
+obj[["eGRN.exp"]] <- CreateAssayObject(counts = eGRN.exp)
+obj[['eGRN.exp']][1:5, 1:5]
+
+
+# Create assay for the accessibility
+atac.m <- GetAssayData(obj, slot = "data", assay = "ATAC")
+eGRN.acc <- Reduce("rbind", pbmclapply(eGRNs.two.times, function(x) {
+  v <- apply(atac.m[x$peaks, , drop = F], 2, mean)
+  v[setdiff(colnames(atac.m), x$cells)] <- 0
+  v
+}, mc.cores = detectCores()))
+dim(eGRN.acc)
+rownames(eGRN.acc) <- seq_along(eGRNs.two.times)
+eGRN.acc[1:5, 1:5]
+obj[["eGRN.acc"]] <- CreateAssayObject(counts = eGRN.acc)
+obj[["eGRN.acc"]][1:5, 1:5]
+qs::qsave(obj, paste0(R.dir, "Obj_eGRN_assays.qsave"))
+
+
+# There are too few cells in FeaturePlots.
+# Hence, I will not use FeaturePlots.
+
+# Get DEGs and DARs belonging to eGRNs
+eGRN.genes <- Reduce("union", lapply(eGRNs.two.times, "[[", "genes"))
+length(eGRN.genes)
+eGRN.peaks <- Reduce("union", lapply(eGRNs.two.times, "[[", "peaks"))
+length(eGRN.peaks)
+Idents(obj) <- obj$Time
+DefaultAssay(obj) <- "RNA"
+DEGs <- FindMarkers(object = obj, features = eGRN.genes, 
+                    ident.1 = "2.5 months", ident.2 = "13+ months")
+qs::qsave(DEGs, paste0(R.dir, "DEGs.qsave"))
+DefaultAssay(obj) <- "ATAC"
+# DARs <- FindMarkers(object = obj, features = eGRN.peaks, 
+#                     ident.1 = "2.5 months", ident.2 = "13+ months")
+# qs::qsave(DARs, paste0(R.dir, "DARs.qsave"))
+
+
+# Filter DEGs
+DEGs <- DEGs[DEGs$p_val_adj < 0.05,]
+dim(DEGs)
+# Only 181 DEGs are retained for 2.5 months and 13+ months.
+# Therefore, I will discard this plot.
+
+
+# AD-associated proteins: JUND, MAP1B, FOS, MFGE8, JUNB, and JUN
+# Ref: Xu J, Zhang P, Huang Y, et al. Multimodal single-cell/nucleus RNA sequencing data analysis uncovers molecular networks between disease-associated microglia and astrocytes with implications for drug repurposing in Alzheimer's disease[J]. Genome research, 2021, 31(10): 1900-1912.
+TFs <- sapply(eGRNs.two.times, "[[", "TF") %>% tolower %>% capitalize # we have Jund, Jun, and Fos
+TFs
+table(TFs)
+
+# Nfe2: Osama A, Zhang J, Yao J, Yao X, Fang J. Nrf2: a dark horse in Alzheimer's disease treatment. Ageing Res Rev. 2020 Dec;64:101206. doi: 10.1016/j.arr.2020.101206. Epub 2020 Nov 2. PMID: 33144124.
+# Plag1: Liu C, Chyr J, Zhao W, Xu Y, Ji Z, Tan H, Soto C, Zhou X; Alzheimer’s Disease Neuroimaging Initiative. Genome-Wide Association and Mechanistic Studies Indicate That Immune Response Contributes to Alzheimer's Disease Development. Front Genet. 2018 Sep 24;9:410. doi: 10.3389/fgene.2018.00410. PMID: 30319691; PMCID: PMC6166008.
+
+# Esr2: Ulhaq ZS, Garcia CP. Estrogen receptor beta (ESR2) gene polymorphism and susceptibility to dementia. Acta Neurol Belg. 2021 Oct;121(5):1281-1293. doi: 10.1007/s13760-020-01360-z. Epub 2020 Apr 25. PMID: 32335869.
+
+# Nr2c2: Dharshini S A P, Taguchi Y H, Gromiha M M. Exploring the selective vulnerability in Alzheimer disease using tissue specific variant analysis[J]. Genomics, 2019, 111(4): 936-949.
+
+# Elk4: Liu Q, Zhu L, Liu X, et al. TRA2A-induced upregulation of LINC00662 regulates blood-brain barrier permeability by affecting ELK4 mRNA stability in Alzheimer’s microenvironment[J]. RNA biology, 2020, 17(9): 1293-1308.
+
+# Nfatc2: Manocha GD, Ghatak A, Puig KL, Kraner SD, Norris CM, Combs CK. NFATc2 Modulates Microglial Activation in the AβPP/PS1 Mouse Model of Alzheimer's Disease. J Alzheimers Dis. 2017;58(3):775-787. doi: 10.3233/JAD-151203. PMID: 28505967; PMCID: PMC6265241.
+
+# NKX3-1: Khayer, N., Jalessi, M., Jahanbakhshi, A. et al. Nkx3-1 and Fech genes might be switch genes involved in pituitary non-functioning adenoma invasiveness. Sci Rep 11, 20943 (2021). https://doi.org/10.1038/s41598-021-00431-2
+
+# AR: Ferrari R, Dawoodi S, Raju M, Thumma A, Hynan LS, Maasumi SH, Reisch JS, O'Bryant S, Jenkins M, Barber R, Momeni P. Androgen receptor gene and sex-specific Alzheimer's disease. Neurobiol Aging. 2013 Aug;34(8):2077.e19-20. doi: 10.1016/j.neurobiolaging.2013.02.017. Epub 2013 Mar 29. PMID: 23545426; PMCID: PMC4012749.
+
+
+Jund.genes <- Reduce("union", lapply(eGRNs.two.times[c(5, 7)], "[[", "genes"))
+length(Jund.genes)
+Jund.cells <- Reduce("union", lapply(eGRNs.two.times[c(5, 7)], "[[", "cells"))
+length(Jund.cells)
+
+
+# Rearrange genes and cells to showcase the matrix
+Jund.5 <- eGRNs.two.times[[5]]
+Jund.7 <- eGRNs.two.times[[7]]
+
+# Genes
+genes.1 <- setdiff(Jund.5$genes, Jund.7$genes)
+genes.2 <- intersect(Jund.5$genes, Jund.7$genes)
+genes.3 <- setdiff(Jund.7$genes, Jund.5$genes)
+
+# Peaks
+peaks.1 <- setdiff(Jund.5$peaks, Jund.7$peaks)
+peaks.2 <- intersect(Jund.5$peaks, Jund.7$peaks)
+peaks.3 <- setdiff(Jund.7$peaks, Jund.5$peaks)
+
+# Cells
+cells.1 <- setdiff(Jund.5$cells, Jund.7$cells)
+cells.2 <- intersect(Jund.5$cells, Jund.7$cells)
+cells.3 <- setdiff(Jund.7$cells, Jund.5$cells)
+
+
+# Build matrix for RNA
+Jund.rna <- rna.m[c(genes.1, genes.2, genes.3), 
+                     c(cells.1, cells.2, cells.3)]
+Jund.rna <- Jund.rna / apply(Jund.rna, 1, max)
+dim(Jund.rna)
+class(Jund.rna)
+Jund.exp.summ <- summary(Jund.rna)
+Jund.exp.tile <- rbindlist(apply(Jund.exp.summ, 1, function(x) {
+  list(rownames(Jund.rna)[x[1]], colnames(Jund.rna)[x[2]], 
+       x[3])
+}))
+colnames(Jund.exp.tile) <- c("Gene", "Cell", "Expression")
+Jund.exp.tile$Gene <- factor(Jund.exp.tile$Gene, levels = rownames(Jund.rna))
+Jund.exp.tile$Cell <- factor(Jund.exp.tile$Cell, levels = colnames(Jund.rna))
+p.Jund.exp <- ggplot(Jund.exp.tile, aes(x = Cell, y = Gene, fill = Expression)) + 
+  geom_tile(color = "white") + 
+  scale_fill_gradient(low = "#FFDEDE", high = "#FF6464") + coord_fixed() + 
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+p.Jund.exp
+qs::qsave(p.Jund.exp, paste0(R.dir, "Heatmap_Jund_expression.qsave"))
+
+
+# Build matrix for ATAC
+# Jund.atac <- atac.m[c(peaks.1, peaks.2, peaks.3),
+#                   c(cells.1, cells.2, cells.3)] > 0 %>% as.numeric
+# # Jund.atac <- Jund.atac / apply(Jund.atac, 1, max)
+# dim(Jund.atac)
+# class(Jund.atac)
+# range(Jund.atac)
+# Jund.acc.summ <- summary(Jund.atac)
+# Jund.acc.summ$x <- as.numeric(Jund.acc.summ$x)
+# Jund.acc.tile <- rbindlist(apply(Jund.acc.summ, 1, function(x) {
+#   list(rownames(Jund.atac)[x[1]], colnames(Jund.atac)[x[2]],
+#        x[3])
+# }))
+# colnames(Jund.acc.tile) <- c("CRE", "Cell", "Accessibility")
+# Jund.acc.tile$CRE <- factor(Jund.acc.tile$CRE, levels = rownames(Jund.atac))
+# Jund.acc.tile$Cell <- factor(Jund.acc.tile$Cell, levels = colnames(Jund.atac))
+# p.Jund.acc <- ggplot(Jund.acc.tile, aes(x = Cell, y = CRE, fill = Accessibility)) +
+#   geom_tile(color = "white") +
+#   scale_fill_gradient(low = "#FFDEDE", high = "#FF6464") + coord_fixed() +
+#   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())
+# p.Jund.acc
+
+# We cannot observe obvious difference in accessibility between eGRNs.
+# Hence, we will not include this plot.
+# Now, there are three panels.
+
+
+# Comparative analyses
+# 1. KEGG pathway analyses and comparison
+# 2. eGRNs regulated by the same TFs, e.g., Ar, Fos, Nfe2, Elk4, Esr2, and Zbtb33
+# 3. Difference in expression and accessibility, TF expression
+# 4. Emphasize the CREs (composition and accessibility) in the eGRNs overrepresented in one of the eGRNs
+# 5. Inspect the pathways specific to the key gene or their associated CREs
