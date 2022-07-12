@@ -3,13 +3,6 @@ This module will switch Compiler environment to gnu/9.1.0 and load mkl/2019.0.5
 for R/4.1.0
 
 
-Lmod is automatically replacing "intel/19.0.5" with "gnu/9.1.0".
-
-
-Due to MODULEPATH changes, the following have been reloaded:
-  1) mvapich2/2.3.3
-
-
 
 Registered S3 method overwritten by 'gamlss':
   method   from
@@ -143,7 +136,7 @@ Second step: Get residuals using fitted parameters for 211 genes
 Computing corrected count matrix for 211 genes
   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
 Calculating gene attributes
-Wall clock passed: Time difference of 2.607686 secs
+Wall clock passed: Time difference of 2.669898 secs
 Determine variable features
 Place corrected count matrix in counts slot
 Centering data matrix
@@ -154,7 +147,7 @@ Retained 211 genes and 303 CREs that are close to at least one CREs/genes.
 
 Finished identified 604 TF-peak pairs.
 
-Identified 38 TFs binding 257 TFs.
+Identified 38 TFs binding 257 CREs.
 
 Creating IRISCEM object. 
 The original input file contains 1000 cells and 211 genes 
@@ -186,10 +179,10 @@ File /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Out_sampled/LTMG_matrix.tx
 Discretized data contains 2 classes with charset [ 0 1 ]
 Formatted data are written to /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Out_sampled/LTMG_matrix.txt.chars
 Generating seed list (minimum weight 10)
-8547 seeds generated [0.094 seconds elapsed]
+8547 seeds generated [0.095 seconds elapsed]
 Clustering started
 .............................................................................................................................................
-56 clusters are written to /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Out_sampled/LTMG_matrix.txt.blocks [0.301 seconds elapsed]
+56 clusters are written to /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Out_sampled/LTMG_matrix.txt.blocks [0.310 seconds elapsed]
 56 QUBIC 2.0 blocks were identified.
 
 56 QUBIC 2.0 blocks were identified.
@@ -263,71 +256,114 @@ The following object is masked from 'package:base':
 
     union
 
-Testing 149 genes and 280 peaks
-Finished generating 75 CRE-gene linkages.
+
+Attaching package: 'future'
+
+The following objects are masked from 'package:igraph':
+
+    %->%, %<-%
+
+The following object is masked from 'package:Gviz':
+
+    values
+
+The following object is masked from 'package:rtracklayer':
+
+    values
+
+The following object is masked from 'package:GenomicRanges':
+
+    values
+
+The following object is masked from 'package:IRanges':
+
+    values
+
+The following object is masked from 'package:S4Vectors':
+
+    values
+
+Loading required package: slam
+
+Attaching package: 'slam'
+
+The following object is masked from 'package:data.table':
+
+    rollup
+
+Loading required package: sparsesvd
+
+Attaching package: 'qlcMatrix'
+
+The following objects are masked from 'package:Biobase':
+
+    rowMax, rowMin
+
+--------> Testing 149 genes and 280 peaks
+Finished generating 152 CRE-gene linkages.
 
 Finished finding overlapping peaks within 5e+05 bps.
 
 Finished generating 78 CRE-CRE linkages.
 
-Testing 147 genes and 279 peaks
-Finished generating 85 CRE-gene linkages.
+--------> Testing 147 genes and 279 peaks
+Finished generating 148 CRE-gene linkages.
 
 Finished finding overlapping peaks within 5e+05 bps.
 
 Finished generating 66 CRE-CRE linkages.
 
-Testing 160 genes and 258 peaks
-Finished generating 104 CRE-gene linkages.
+--------> Testing 160 genes and 258 peaks
+Finished generating 148 CRE-gene linkages.
 
 Finished finding overlapping peaks within 5e+05 bps.
 
 Finished generating 62 CRE-CRE linkages.
 
-Testing 125 genes and 288 peaks
-Finished generating 67 CRE-gene linkages.
+--------> Testing 125 genes and 288 peaks
+Finished generating 109 CRE-gene linkages.
 
 Finished finding overlapping peaks within 5e+05 bps.
 
 Finished generating 73 CRE-CRE linkages.
 
-Testing 153 genes and 288 peaks
-Finished generating 108 CRE-gene linkages.
+--------> Testing 153 genes and 288 peaks
+Finished generating 138 CRE-gene linkages.
 
 Finished finding overlapping peaks within 5e+05 bps.
 
 Finished generating 92 CRE-CRE linkages.
 
-Testing 122 genes and 258 peaks
-Finished generating 57 CRE-gene linkages.
+--------> Testing 122 genes and 258 peaks
+Finished generating 111 CRE-gene linkages.
 
 Finished finding overlapping peaks within 5e+05 bps.
 
 Finished generating 54 CRE-CRE linkages.
 
-Testing 102 genes and 253 peaks
-Finished generating 64 CRE-gene linkages.
+--------> Testing 102 genes and 253 peaks
+Finished generating 98 CRE-gene linkages.
 
 Finished finding overlapping peaks within 5e+05 bps.
 
 Finished generating 55 CRE-CRE linkages.
 
-Testing 126 genes and 286 peaks
-Finished generating 83 CRE-gene linkages.
+--------> Testing 126 genes and 286 peaks
+Finished generating 126 CRE-gene linkages.
 
 Finished finding overlapping peaks within 5e+05 bps.
 
 Finished generating 81 CRE-CRE linkages.
 
-Testing 107 genes and 283 peaks
-Finished generating 66 CRE-gene linkages.
+--------> Testing 107 genes and 283 peaks
+Finished generating 91 CRE-gene linkages.
 
 Finished finding overlapping peaks within 5e+05 bps.
 
 Finished generating 74 CRE-CRE linkages.
 
-Testing 127 genes and 270 peaks
-Finished generating 80 CRE-gene linkages.
+--------> Testing 127 genes and 270 peaks
+Finished generating 91 CRE-gene linkages.
 
 Finished finding overlapping peaks within 5e+05 bps.
 
@@ -335,7 +371,7 @@ Finished generating 81 CRE-CRE linkages.
 
 Finished constructing 10 heterogeneous graphs.
 
-51 seeds are identified for hybrid biclustering.
+22 seeds are identified for hybrid biclustering.
 
 Processing the putative seed : 1 ...
 
@@ -344,261 +380,93 @@ Processing the 1 hybrid bicluster ...
 Loading required package: KernSmooth
 KernSmooth 2.23 loaded
 Copyright M. P. Wand 1997-2009
-6/5/13 genes/peaks/cells were included in this HBC.
+8/7/13 genes/peaks/cells were included in this HBC.
 
 Processing the putative seed : 2 ...
 
-Processing the 2 hybrid bicluster ...
-
-6/6/12 genes/peaks/cells were included in this HBC.
-
 Processing the putative seed : 3 ...
 
-Processing the 3 hybrid bicluster ...
+Processing the 2 hybrid bicluster ...
 
-5/5/12 genes/peaks/cells were included in this HBC.
+4/4/18 genes/peaks/cells were included in this HBC.
 
 Processing the putative seed : 4 ...
 
-Processing the 4 hybrid bicluster ...
+Processing the 3 hybrid bicluster ...
 
-5/5/13 genes/peaks/cells were included in this HBC.
+5/4/11 genes/peaks/cells were included in this HBC.
 
 Processing the putative seed : 5 ...
 
-Processing the 5 hybrid bicluster ...
+Processing the 4 hybrid bicluster ...
 
-6/6/11 genes/peaks/cells were included in this HBC.
+4/3/13 genes/peaks/cells were included in this HBC.
 
 Processing the putative seed : 6 ...
 
-Processing the 6 hybrid bicluster ...
+Processing the 5 hybrid bicluster ...
 
-5/5/12 genes/peaks/cells were included in this HBC.
+3/2/11 genes/peaks/cells were included in this HBC.
 
 Processing the putative seed : 7 ...
 
-Processing the 7 hybrid bicluster ...
+Processing the 6 hybrid bicluster ...
 
-6/6/10 genes/peaks/cells were included in this HBC.
+4/4/11 genes/peaks/cells were included in this HBC.
 
 Processing the putative seed : 8 ...
 
-Processing the 8 hybrid bicluster ...
+Processing the 7 hybrid bicluster ...
 
 Processing the putative seed : 9 ...
 
 Processing the putative seed : 10 ...
 
-Processing the 9 hybrid bicluster ...
-
-4/4/12 genes/peaks/cells were included in this HBC.
-
 Processing the putative seed : 11 ...
 
-Processing the 10 hybrid bicluster ...
+Processing the 8 hybrid bicluster ...
 
-3/3/17 genes/peaks/cells were included in this HBC.
+4/4/11 genes/peaks/cells were included in this HBC.
 
 Processing the putative seed : 12 ...
 
 Processing the putative seed : 13 ...
 
-Processing the 11 hybrid bicluster ...
-
-5/5/11 genes/peaks/cells were included in this HBC.
-
 Processing the putative seed : 14 ...
 
-Processing the 12 hybrid bicluster ...
+Processing the 9 hybrid bicluster ...
 
-4/4/12 genes/peaks/cells were included in this HBC.
+3/3/13 genes/peaks/cells were included in this HBC.
 
 Processing the putative seed : 15 ...
 
 Processing the putative seed : 16 ...
 
-Processing the 13 hybrid bicluster ...
-
-3/3/11 genes/peaks/cells were included in this HBC.
-
 Processing the putative seed : 17 ...
-
-Processing the 14 hybrid bicluster ...
-
-4/4/12 genes/peaks/cells were included in this HBC.
 
 Processing the putative seed : 18 ...
 
-Processing the 15 hybrid bicluster ...
-
-4/4/11 genes/peaks/cells were included in this HBC.
+Processing the 10 hybrid bicluster ...
 
 Processing the putative seed : 19 ...
 
-Processing the 16 hybrid bicluster ...
+Processing the 11 hybrid bicluster ...
 
-4/4/10 genes/peaks/cells were included in this HBC.
+2/2/21 genes/peaks/cells were included in this HBC.
 
 Processing the putative seed : 20 ...
 
 Processing the putative seed : 21 ...
 
-Processing the 17 hybrid bicluster ...
-
-4/4/12 genes/peaks/cells were included in this HBC.
-
 Processing the putative seed : 22 ...
 
-Processing the 18 hybrid bicluster ...
-
-3/3/13 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 23 ...
-
-Processing the 19 hybrid bicluster ...
-
-2/2/23 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 24 ...
-
-Processing the 20 hybrid bicluster ...
-
-3/3/18 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 25 ...
-
-Processing the 21 hybrid bicluster ...
-
-3/3/10 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 26 ...
-
-Processing the putative seed : 27 ...
-
-Processing the 22 hybrid bicluster ...
-
-Processing the putative seed : 28 ...
-
-Processing the 23 hybrid bicluster ...
-
-5/5/10 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 29 ...
-
-Processing the 24 hybrid bicluster ...
-
-3/3/10 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 30 ...
-
-Processing the 25 hybrid bicluster ...
-
-3/3/11 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 31 ...
-
-Processing the 26 hybrid bicluster ...
-
-2/2/17 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 32 ...
-
-Processing the 27 hybrid bicluster ...
-
-4/4/11 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 33 ...
-
-Processing the 28 hybrid bicluster ...
-
-3/3/12 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 34 ...
-
-Processing the 29 hybrid bicluster ...
-
-4/4/11 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 35 ...
-
-Processing the 30 hybrid bicluster ...
-
-2/2/11 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 36 ...
-
-Processing the 31 hybrid bicluster ...
-
-2/2/11 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 37 ...
-
-Processing the putative seed : 38 ...
-
-Processing the 32 hybrid bicluster ...
-
-3/3/10 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 39 ...
-
-Processing the 33 hybrid bicluster ...
-
-Processing the putative seed : 40 ...
-
-Processing the 34 hybrid bicluster ...
-
-2/2/10 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 41 ...
-
-Processing the putative seed : 42 ...
-
-Processing the 35 hybrid bicluster ...
-
-4/4/12 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 43 ...
-
-Processing the 36 hybrid bicluster ...
-
-3/3/10 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 44 ...
-
-Processing the 37 hybrid bicluster ...
-
-2/2/21 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 45 ...
-
-Processing the 38 hybrid bicluster ...
-
-3/3/12 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 46 ...
-
-Processing the putative seed : 47 ...
-
-Processing the 39 hybrid bicluster ...
-
-2/2/15 genes/peaks/cells were included in this HBC.
-
-Processing the putative seed : 48 ...
-
-Processing the 40 hybrid bicluster ...
+Processing the 12 hybrid bicluster ...
 
 2/2/14 genes/peaks/cells were included in this HBC.
 
-Processing the putative seed : 49 ...
+Identified 12 hybrid biclusters (HBCs).
 
-Processing the putative seed : 50 ...
-
-Processing the putative seed : 51 ...
-
-Identified 40 hybrid biclusters (HBCs).
-
-17 HBCs are discovered after fine-tuning.
+10 HBCs are discovered after fine-tuning.
 
 Performing submodular optimization ...
 
@@ -606,74 +474,46 @@ Calculating the pairwise similarity between HBCs ...
 
 Finished evaluating the 1 HBCs.
 
-eGRN optimization score: 4.
+eGRN optimization score: 5.
 
 Finished evaluating the 2 HBCs.
 
-eGRN optimization score: 17.
+eGRN optimization score: 9.
 
 Finished evaluating the 3 HBCs.
 
-eGRN optimization score: 20.
+eGRN optimization score: 16.
 
 Finished evaluating the 4 HBCs.
 
-eGRN optimization score: 22.
+eGRN optimization score: 17.
 
 Finished evaluating the 5 HBCs.
 
-eGRN optimization score: 35.
+eGRN optimization score: 21.
 
 Finished evaluating the 6 HBCs.
 
-eGRN optimization score: 42.
+eGRN optimization score: 24.
 
 Finished evaluating the 7 HBCs.
 
-eGRN optimization score: 44.
+eGRN optimization score: 26.
 
 Finished evaluating the 8 HBCs.
 
-eGRN optimization score: 47.
+eGRN optimization score: 26.
 
 Finished evaluating the 9 HBCs.
 
-eGRN optimization score: 48.
+eGRN optimization score: 27.
 
 Finished evaluating the 10 HBCs.
 
-eGRN optimization score: 49.
+eGRN optimization score: 28.
 
-Finished evaluating the 11 HBCs.
+10 eGRNs yield the maximum score.
 
-eGRN optimization score: 50.
+Submodular optimization identified 10 enhancer gene regulatory networks (eGRNs).
 
-Finished evaluating the 12 HBCs.
-
-eGRN optimization score: 51.
-
-Finished evaluating the 13 HBCs.
-
-eGRN optimization score: 51.
-
-Finished evaluating the 14 HBCs.
-
-eGRN optimization score: 53.
-
-Finished evaluating the 15 HBCs.
-
-eGRN optimization score: 53.
-
-Finished evaluating the 16 HBCs.
-
-eGRN optimization score: 54.
-
-Finished evaluating the 17 HBCs.
-
-eGRN optimization score: 55.
-
-17 eGRNs yield the maximum score.
-
-Submodular optimization identified 17 enhancer gene regulatory networks (eGRNs).
-
-There were 21 warnings (use warnings() to see them)
+There were 50 or more warnings (use warnings() to see the first 50)

@@ -10,6 +10,7 @@ library(Seurat)
 library(dplyr)
 library(pbmcapply)
 library(ggvenn)
+library(pbapply)
 
 
 # Global parameters
@@ -22,6 +23,7 @@ orig.dir <- "/fs/ess/PCON0022/liyang/STREAM/Case_2_AD/10X_data/"
 
 # Source files
 source(paste0(tool.dir, "visual_tools.R"))
+source(paste0(tool.dir, "cistrome_tools.R"))
 
 
 # Load Seurat object
@@ -270,6 +272,7 @@ TFs
 table(TFs)
 
 # Nfe2: Osama A, Zhang J, Yao J, Yao X, Fang J. Nrf2: a dark horse in Alzheimer's disease treatment. Ageing Res Rev. 2020 Dec;64:101206. doi: 10.1016/j.arr.2020.101206. Epub 2020 Nov 2. PMID: 33144124.
+
 # Plag1: Liu C, Chyr J, Zhao W, Xu Y, Ji Z, Tan H, Soto C, Zhou X; Alzheimer’s Disease Neuroimaging Initiative. Genome-Wide Association and Mechanistic Studies Indicate That Immune Response Contributes to Alzheimer's Disease Development. Front Genet. 2018 Sep 24;9:410. doi: 10.3389/fgene.2018.00410. PMID: 30319691; PMCID: PMC6166008.
 
 # Esr2: Ulhaq ZS, Garcia CP. Estrogen receptor beta (ESR2) gene polymorphism and susceptibility to dementia. Acta Neurol Belg. 2021 Oct;121(5):1281-1293. doi: 10.1007/s13760-020-01360-z. Epub 2020 Apr 25. PMID: 32335869.
@@ -282,7 +285,7 @@ table(TFs)
 
 # NKX3-1: Khayer, N., Jalessi, M., Jahanbakhshi, A. et al. Nkx3-1 and Fech genes might be switch genes involved in pituitary non-functioning adenoma invasiveness. Sci Rep 11, 20943 (2021). https://doi.org/10.1038/s41598-021-00431-2
 
-# AR: Ferrari R, Dawoodi S, Raju M, Thumma A, Hynan LS, Maasumi SH, Reisch JS, O'Bryant S, Jenkins M, Barber R, Momeni P. Androgen receptor gene and sex-specific Alzheimer's disease. Neurobiol Aging. 2013 Aug;34(8):2077.e19-20. doi: 10.1016/j.neurobiolaging.2013.02.017. Epub 2013 Mar 29. PMID: 23545426; PMCID: PMC4012749.
+# Ar: Ferrari R, Dawoodi S, Raju M, Thumma A, Hynan LS, Maasumi SH, Reisch JS, O'Bryant S, Jenkins M, Barber R, Momeni P. Androgen receptor gene and sex-specific Alzheimer's disease. Neurobiol Aging. 2013 Aug;34(8):2077.e19-20. doi: 10.1016/j.neurobiolaging.2013.02.017. Epub 2013 Mar 29. PMID: 23545426; PMCID: PMC4012749.
 
 
 Jund.genes <- Reduce("union", lapply(eGRNs.two.times[c(5, 7)], "[[", "genes"))
@@ -366,3 +369,25 @@ qs::qsave(p.Jund.exp, paste0(R.dir, "Heatmap_Jund_expression.qsave"))
 # 3. Difference in expression and accessibility, TF expression
 # 4. Emphasize the CREs (composition and accessibility) in the eGRNs overrepresented in one of the eGRNs
 # 5. Inspect the pathways specific to the key gene or their associated CREs
+
+
+# Select the eGRNs for analyses
+TF.interested <- toupper(names(which(table(TFs) > 1)))
+TF.interested
+eGRNs.Cyto <- eGRNs.two.times[sapply(eGRNs.two.times, function(x) {
+  x$TF %in% TF.interested
+})]
+length(eGRNs.Cyto)
+
+
+# Connect genes to CREs
+# We only retain the closest CRE for each gene to avoid false positives
+GR.list <- pblapply(eGRNs.Cyto, function(x) {
+  link_peaks_to_genes(gene.obj = x$genes, peak.obj = x$peaks, 
+                      distance = "gene",
+                      org = "mm10")
+})
+qs::qsave(GR.list, paste0(R.dir, "GRanges_list.qsave"))
+
+
+# Prepare Cytoscape documents for visualization

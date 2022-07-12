@@ -1,0 +1,768 @@
+
+This module will switch Compiler environment to gnu/9.1.0 and load mkl/2019.0.5
+for R/4.1.0
+
+
+
+Registered S3 method overwritten by 'gamlss':
+  method   from
+  print.ri bit 
+
+Registered S3 method overwritten by 'ggtree':
+  method      from 
+  identify.gg ggfun
+Attaching SeuratObject
+Loading required package: BSgenome
+Loading required package: BiocGenerics
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unsplit, which.max, which.min
+
+Loading required package: S4Vectors
+Loading required package: stats4
+
+Attaching package: ‘S4Vectors’
+
+The following object is masked from ‘package:base’:
+
+    expand.grid
+
+Loading required package: IRanges
+Loading required package: GenomeInfoDb
+Loading required package: GenomicRanges
+Loading required package: Biostrings
+Loading required package: XVector
+
+Attaching package: ‘Biostrings’
+
+The following object is masked from ‘package:base’:
+
+    strsplit
+
+Loading required package: rtracklayer
+Loading genome sequences of mm10 ...
+
+Computing the GC content, CRE lengths, and dinucleotide base frequencies ...
+
+Loading required package: parallel
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:Biostrings’:
+
+    collapse, intersect, setdiff, setequal, union
+
+The following object is masked from ‘package:XVector’:
+
+    slice
+
+The following objects are masked from ‘package:GenomicRanges’:
+
+    intersect, setdiff, union
+
+The following object is masked from ‘package:GenomeInfoDb’:
+
+    intersect
+
+The following objects are masked from ‘package:IRanges’:
+
+    collapse, desc, intersect, setdiff, slice, union
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    first, intersect, rename, setdiff, setequal, union
+
+The following objects are masked from ‘package:BiocGenerics’:
+
+    combine, intersect, setdiff, union
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘data.table’
+
+The following objects are masked from ‘package:dplyr’:
+
+    between, first, last
+
+The following object is masked from ‘package:GenomicRanges’:
+
+    shift
+
+The following object is masked from ‘package:IRanges’:
+
+    shift
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    first, second
+
+
+Attaching package: ‘Matrix’
+
+The following object is masked from ‘package:S4Vectors’:
+
+    expand
+
+Calculating cell attributes from input UMI matrix: log_umi
+Variance stabilizing transformation of count matrix of size 17395 by 7517
+Model formula is y ~ log_umi
+Get Negative Binomial regression parameters per gene
+Using 2000 genes, 5000 cells
+  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
+Found 75 outliers - those will be ignored in fitting/regularization step
+
+Second step: Get residuals using fitted parameters for 17395 genes
+  |                                                                              |                                                                      |   0%  |                                                                              |==                                                                    |   3%  |                                                                              |====                                                                  |   6%  |                                                                              |======                                                                |   9%  |                                                                              |========                                                              |  11%  |                                                                              |==========                                                            |  14%  |                                                                              |============                                                          |  17%  |                                                                              |==============                                                        |  20%  |                                                                              |================                                                      |  23%  |                                                                              |==================                                                    |  26%  |                                                                              |====================                                                  |  29%  |                                                                              |======================                                                |  31%  |                                                                              |========================                                              |  34%  |                                                                              |==========================                                            |  37%  |                                                                              |============================                                          |  40%  |                                                                              |==============================                                        |  43%  |                                                                              |================================                                      |  46%  |                                                                              |==================================                                    |  49%  |                                                                              |====================================                                  |  51%  |                                                                              |======================================                                |  54%  |                                                                              |========================================                              |  57%  |                                                                              |==========================================                            |  60%  |                                                                              |============================================                          |  63%  |                                                                              |==============================================                        |  66%  |                                                                              |================================================                      |  69%  |                                                                              |==================================================                    |  71%  |                                                                              |====================================================                  |  74%  |                                                                              |======================================================                |  77%  |                                                                              |========================================================              |  80%  |                                                                              |==========================================================            |  83%  |                                                                              |============================================================          |  86%  |                                                                              |==============================================================        |  89%  |                                                                              |================================================================      |  91%  |                                                                              |==================================================================    |  94%  |                                                                              |====================================================================  |  97%  |                                                                              |======================================================================| 100%
+Computing corrected count matrix for 17395 genes
+  |                                                                              |                                                                      |   0%  |                                                                              |==                                                                    |   3%  |                                                                              |====                                                                  |   6%  |                                                                              |======                                                                |   9%  |                                                                              |========                                                              |  11%  |                                                                              |==========                                                            |  14%  |                                                                              |============                                                          |  17%  |                                                                              |==============                                                        |  20%  |                                                                              |================                                                      |  23%  |                                                                              |==================                                                    |  26%  |                                                                              |====================                                                  |  29%  |                                                                              |======================                                                |  31%  |                                                                              |========================                                              |  34%  |                                                                              |==========================                                            |  37%  |                                                                              |============================                                          |  40%  |                                                                              |==============================                                        |  43%  |                                                                              |================================                                      |  46%  |                                                                              |==================================                                    |  49%  |                                                                              |====================================                                  |  51%  |                                                                              |======================================                                |  54%  |                                                                              |========================================                              |  57%  |                                                                              |==========================================                            |  60%  |                                                                              |============================================                          |  63%  |                                                                              |==============================================                        |  66%  |                                                                              |================================================                      |  69%  |                                                                              |==================================================                    |  71%  |                                                                              |====================================================                  |  74%  |                                                                              |======================================================                |  77%  |                                                                              |========================================================              |  80%  |                                                                              |==========================================================            |  83%  |                                                                              |============================================================          |  86%  |                                                                              |==============================================================        |  89%  |                                                                              |================================================================      |  91%  |                                                                              |==================================================================    |  94%  |                                                                              |====================================================================  |  97%  |                                                                              |======================================================================| 100%
+Calculating gene attributes
+Wall clock passed: Time difference of 1.902533 mins
+Determine variable features
+Place corrected count matrix in counts slot
+Centering data matrix
+  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
+Set default assay to SCT
+Performing TF-IDF normalization
+Retained 3000 genes and 62579 CREs that are close to at least one CREs/genes.
+
+Finished identified 47491 TF-peak pairs.
+
+Identified 46 TFs binding 27574 CREs.
+
+Creating IRISCEM object. 
+The original input file contains 7517 cells and 3000 genes 
+Removed 0 genes that total expression value is equal or less than 0
+Removed 0 cells that number of expressed gene is equal or less than 0
+number of iterations= 44 
+using all genes.
+Progress:0%
+Progress:10%
+Progress:20%
+Progress:30%
+Progress:40%
+Progress:50%
+Progress:60%
+Progress:70%
+Progress:80%
+Progress:90%
+Progress:100%
+Wrote the discretized gene expression to file /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Rfile/Rfile_2.5/LTMG_matrix.txt.
+
+Finished LTMG modeling for 3000 genes across 7517 cells.
+
+QUBIC2 command: /fs/ess/PCON0022/liyang/tools/biclustering/QUBIC2-master/qubic -i /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Rfile/Rfile_2.5/LTMG_matrix.txt -c 1 -k 10 -o 500 -f 0.25
+
+
+QUBIC 2.2: greedy biclustering (compiled Dec  9 2021 12:12:18)
+
+File /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Rfile/Rfile_2.5/LTMG_matrix.txt contains 3000 genes by 7517 conditions
+Discretized data contains 2 classes with charset [ 0 1 ]
+Formatted data are written to /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Rfile/Rfile_2.5/LTMG_matrix.txt.chars
+Generating seed list (minimum weight 10)
+2629391 seeds generated [16.896 seconds elapsed]
+Clustering started
+...................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+500 clusters are written to /fs/ess/scratch/PCON0022/liyang/stream/Case_2_AD/Rfile/Rfile_2.5/LTMG_matrix.txt.blocks [315.812 seconds elapsed]
+500 QUBIC 2.0 blocks were identified.
+
+500 QUBIC 2.0 blocks were identified.
+
+Identified 10 QUBIC biclusters.
+
+10 QUBIC biclusters will be used for Steiner forest modeling.
+
+Loading required package: monocle
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+Loading required package: ggplot2
+Loading required package: VGAM
+Loading required package: splines
+Loading required package: DDRTree
+Loading required package: irlba
+Loading required package: Gviz
+Loading required package: grid
+
+Attaching package: ‘grid’
+
+The following object is masked from ‘package:Biostrings’:
+
+    pattern
+
+
+Attaching package: 'igraph'
+
+The following objects are masked from 'package:dplyr':
+
+    as_data_frame, groups, union
+
+The following objects are masked from 'package:rtracklayer':
+
+    blocks, path
+
+The following object is masked from 'package:Biostrings':
+
+    union
+
+The following object is masked from 'package:XVector':
+
+    path
+
+The following object is masked from 'package:GenomicRanges':
+
+    union
+
+The following object is masked from 'package:IRanges':
+
+    union
+
+The following object is masked from 'package:S4Vectors':
+
+    union
+
+The following objects are masked from 'package:BiocGenerics':
+
+    normalize, path, union
+
+The following objects are masked from 'package:stats':
+
+    decompose, spectrum
+
+The following object is masked from 'package:base':
+
+    union
+
+
+Attaching package: 'future'
+
+The following objects are masked from 'package:igraph':
+
+    %->%, %<-%
+
+The following object is masked from 'package:Gviz':
+
+    values
+
+The following object is masked from 'package:rtracklayer':
+
+    values
+
+The following object is masked from 'package:GenomicRanges':
+
+    values
+
+The following object is masked from 'package:IRanges':
+
+    values
+
+The following object is masked from 'package:S4Vectors':
+
+    values
+
+Loading required package: slam
+
+Attaching package: 'slam'
+
+The following object is masked from 'package:data.table':
+
+    rollup
+
+Loading required package: sparsesvd
+
+Attaching package: 'qlcMatrix'
+
+The following objects are masked from 'package:Biobase':
+
+    rowMax, rowMin
+
+--------> Testing 2419 genes and 3000 peaks
+Finished generating 4794 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 2386 CRE-CRE linkages.
+
+--------> Testing 2315 genes and 3000 peaks
+Finished generating 4659 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 2016 CRE-CRE linkages.
+
+--------> Testing 2199 genes and 3000 peaks
+Finished generating 4333 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 2347 CRE-CRE linkages.
+
+--------> Testing 2263 genes and 3000 peaks
+Finished generating 4266 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 2315 CRE-CRE linkages.
+
+--------> Testing 2210 genes and 3000 peaks
+Finished generating 4427 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 2097 CRE-CRE linkages.
+
+--------> Testing 2130 genes and 3000 peaks
+Finished generating 4452 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 2059 CRE-CRE linkages.
+
+--------> Testing 2301 genes and 3000 peaks
+Finished generating 4395 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 2184 CRE-CRE linkages.
+
+--------> Testing 1988 genes and 3000 peaks
+Finished generating 3599 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 2145 CRE-CRE linkages.
+
+--------> Testing 1894 genes and 3000 peaks
+Finished generating 3503 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 2423 CRE-CRE linkages.
+
+--------> Testing 2129 genes and 3000 peaks
+Finished generating 4126 CRE-gene linkages.
+
+Finished finding overlapping peaks within 5e+05 bps.
+
+Finished generating 2225 CRE-CRE linkages.
+
+Finished constructing 10 heterogeneous graphs.
+
+87 seeds are identified for hybrid biclustering.
+
+Processing the putative seed : 1 ...
+
+Processing the 1 hybrid bicluster ...
+
+Loading required package: KernSmooth
+KernSmooth 2.23 loaded
+Copyright M. P. Wand 1997-2009
+26/26/88 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 2 ...
+
+Processing the 2 hybrid bicluster ...
+
+23/22/44 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 3 ...
+
+Processing the 3 hybrid bicluster ...
+
+24/23/50 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 4 ...
+
+Processing the 4 hybrid bicluster ...
+
+24/24/255 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 5 ...
+
+Processing the 5 hybrid bicluster ...
+
+Processing the putative seed : 6 ...
+
+Processing the 6 hybrid bicluster ...
+
+22/21/39 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 7 ...
+
+Processing the 7 hybrid bicluster ...
+
+21/20/84 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 8 ...
+
+Processing the 8 hybrid bicluster ...
+
+Processing the putative seed : 9 ...
+
+Processing the 9 hybrid bicluster ...
+
+Processing the putative seed : 10 ...
+
+Processing the 10 hybrid bicluster ...
+
+Processing the putative seed : 11 ...
+
+Processing the 11 hybrid bicluster ...
+
+21/21/44 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 12 ...
+
+Processing the 12 hybrid bicluster ...
+
+Processing the putative seed : 13 ...
+
+Processing the putative seed : 14 ...
+
+Processing the 13 hybrid bicluster ...
+
+17/14/48 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 15 ...
+
+Processing the 14 hybrid bicluster ...
+
+20/20/85 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 16 ...
+
+Processing the putative seed : 17 ...
+
+Processing the 15 hybrid bicluster ...
+
+20/20/85 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 18 ...
+
+Processing the 16 hybrid bicluster ...
+
+18/18/58 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 19 ...
+
+Processing the 17 hybrid bicluster ...
+
+20/19/33 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 20 ...
+
+Processing the 18 hybrid bicluster ...
+
+20/19/24 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 21 ...
+
+Processing the putative seed : 22 ...
+
+Processing the 19 hybrid bicluster ...
+
+19/19/35 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 23 ...
+
+Processing the 20 hybrid bicluster ...
+
+19/17/69 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 24 ...
+
+Processing the 21 hybrid bicluster ...
+
+19/19/91 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 25 ...
+
+Processing the 22 hybrid bicluster ...
+
+19/19/75 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 26 ...
+
+Processing the 23 hybrid bicluster ...
+
+19/19/79 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 27 ...
+
+Processing the 24 hybrid bicluster ...
+
+Processing the putative seed : 28 ...
+
+Processing the 25 hybrid bicluster ...
+
+Processing the putative seed : 29 ...
+
+Processing the 26 hybrid bicluster ...
+
+Processing the putative seed : 30 ...
+
+Processing the 27 hybrid bicluster ...
+
+18/18/38 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 31 ...
+
+Processing the 28 hybrid bicluster ...
+
+Processing the putative seed : 32 ...
+
+Processing the putative seed : 33 ...
+
+Processing the 29 hybrid bicluster ...
+
+16/14/47 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 34 ...
+
+Processing the putative seed : 35 ...
+
+Processing the 30 hybrid bicluster ...
+
+15/12/18 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 36 ...
+
+Processing the putative seed : 37 ...
+
+Processing the 31 hybrid bicluster ...
+
+18/17/36 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 38 ...
+
+Processing the putative seed : 39 ...
+
+Processing the putative seed : 40 ...
+
+Processing the 32 hybrid bicluster ...
+
+17/16/55 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 41 ...
+
+Processing the 33 hybrid bicluster ...
+
+17/17/64 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 42 ...
+
+Processing the 34 hybrid bicluster ...
+
+17/17/78 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 43 ...
+
+Processing the 35 hybrid bicluster ...
+
+14/13/19 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 44 ...
+
+Processing the 36 hybrid bicluster ...
+
+Processing the putative seed : 45 ...
+
+Processing the 37 hybrid bicluster ...
+
+16/16/30 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 46 ...
+
+Processing the putative seed : 47 ...
+
+Processing the 38 hybrid bicluster ...
+
+18/18/53 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 48 ...
+
+Processing the 39 hybrid bicluster ...
+
+19/17/33 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 49 ...
+
+Processing the putative seed : 50 ...
+
+Processing the 40 hybrid bicluster ...
+
+Processing the putative seed : 51 ...
+
+Processing the 41 hybrid bicluster ...
+
+Processing the putative seed : 52 ...
+
+Processing the 42 hybrid bicluster ...
+
+Processing the putative seed : 53 ...
+
+Processing the 43 hybrid bicluster ...
+
+14/14/20 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 54 ...
+
+Processing the 44 hybrid bicluster ...
+
+17/17/73 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 55 ...
+
+Processing the 45 hybrid bicluster ...
+
+8/7/14 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 56 ...
+
+Processing the putative seed : 57 ...
+
+Processing the putative seed : 58 ...
+
+Processing the putative seed : 59 ...
+
+Processing the putative seed : 60 ...
+
+Processing the putative seed : 61 ...
+
+Processing the putative seed : 62 ...
+
+Processing the 46 hybrid bicluster ...
+
+Processing the putative seed : 63 ...
+
+Processing the 47 hybrid bicluster ...
+
+13/13/14 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 64 ...
+
+Processing the 48 hybrid bicluster ...
+
+17/17/37 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 65 ...
+
+Processing the putative seed : 66 ...
+
+Processing the putative seed : 67 ...
+
+Processing the 49 hybrid bicluster ...
+
+17/17/41 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 68 ...
+
+Processing the putative seed : 69 ...
+
+Processing the 50 hybrid bicluster ...
+
+13/12/54 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 70 ...
+
+Processing the 51 hybrid bicluster ...
+
+17/17/18 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 71 ...
+
+Processing the putative seed : 72 ...
+
+Processing the 52 hybrid bicluster ...
+
+Processing the putative seed : 73 ...
+
+Processing the putative seed : 74 ...
+
+Processing the 53 hybrid bicluster ...
+
+8/7/19 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 75 ...
+
+Processing the 54 hybrid bicluster ...
+
+Processing the putative seed : 76 ...
+
+Processing the 55 hybrid bicluster ...
+
+Processing the putative seed : 77 ...
+
+Processing the 56 hybrid bicluster ...
+
+9/9/17 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 78 ...
+
+Processing the putative seed : 79 ...
+
+Processing the putative seed : 80 ...
+
+Processing the 57 hybrid bicluster ...
+
+Processing the putative seed : 81 ...
+
+Processing the putative seed : 82 ...
+
+Processing the 58 hybrid bicluster ...
+
+17/16/27 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 83 ...
+
+Processing the 59 hybrid bicluster ...
+
+8/8/13 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 84 ...
+
+Processing the 60 hybrid bicluster ...
+
+14/14/17 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 85 ...
+
+Processing the putative seed : 86 ...
+
+Processing the 61 hybrid bicluster ...
+
+23/22/19 genes/peaks/cells were included in this HBC.
+
+Processing the putative seed : 87 ...
+
+Identified 61 hybrid biclusters (HBCs).
+
+31 HBCs are discovered after fine-tuning.
+
+Submodular optimization identified 31 enhancer gene regulatory networks (eGRNs).
+
+Warning message:
+In write.table(LTMG.matrix, LTMG.file, append = T, quote = F, sep = "\t") :
+  appending column names to file
